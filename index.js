@@ -19,6 +19,11 @@
 
 const express = require("express");
 const app = express();
+require("./DB/connection");
+const routes = require("./router/auth");
+app.use(express.json());
+app.use(routes);
+
 app.get("/", (req, res) => {
   return res.send("Hi");
 });

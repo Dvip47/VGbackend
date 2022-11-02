@@ -19,11 +19,10 @@
 
 const express = require("express");
 const app = express();
-let port = 80 || process.env.PORT;
 app.get("/", (req, res) => {
   return res.send("Hi");
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
   return console.log("Server started");
 });

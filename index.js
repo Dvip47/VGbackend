@@ -19,5 +19,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(` Connected at ${"http://localhost:8000"}`);
+  console.log(` Connected at ${port}`);
 });

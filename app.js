@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 require("./DB/connection");
 const path = require("path");
 const routes = require("./router/auth");
+let port = 8000 || process.env.PORT;
 app.use(express.json());
 app.use(routes);
 // app.use(express.static(path.join(__dirname,"")))
@@ -17,6 +18,6 @@ app.get("*", (req, res) => {
   res.send("err0r 404");
 });
 
-app.listen(8000, () => {
+app.listen(port, () => {
   console.log(` Connected at ${"http://localhost:8000"}`);
 });

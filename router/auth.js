@@ -185,11 +185,7 @@ router.get("/door", async (req, res) => {
   let data = await Product.find({ category: "Door" });
   return res.status(200).json({ success: true, message: data });
 });
-//doorList
-router.get("/door", async (req, res) => {
-  let data = await Product.find({ category: "Door" });
-  return res.status(200).json({ success: true, message: data });
-});
+
 //user delete
 router.get("/deleteUser:_id", async (req, res) => {
   try {

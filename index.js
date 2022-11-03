@@ -8,7 +8,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, PATCH, POST, DELETE, OPTIONS"
   ),
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Origin", "https://vg-1.vercel.app");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: "https://vg-1.vercel.app",
     optionsSuccessStatus: 200,
   })
 );
@@ -34,4 +34,4 @@ app.listen(process.env.PORT || 8000, () => {
   return console.log("Server started");
 });
 
-// https://vercel.com/dvip47/
+// https://vercel.com/dvip47

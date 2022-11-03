@@ -145,7 +145,7 @@ router.post("/order", async (req, res) => {
 });
 
 //admin
-router.get("/admin", async (req, res) => {
+router.get("/order", async (req, res) => {
   let data = await Order.find({});
   return res.status(200).json({ success: true, message: data });
 });

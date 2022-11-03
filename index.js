@@ -1,9 +1,11 @@
 const express = require("express");
+var cors = require("cors");
 const app = express();
 require("./DB/connection");
 const routes = require("./router/auth");
 app.use(express.json());
 app.use(routes);
+app.use(cors());
 
 app.get("/", (req, res) => {
   return res.send("Its running");

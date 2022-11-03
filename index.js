@@ -8,7 +8,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, PATCH, POST, DELETE, OPTIONS"
   ),
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000/",
+    origin: "http://localhost:3000",
     optionsSuccessStatus: 200,
   })
 );

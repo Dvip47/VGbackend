@@ -222,4 +222,71 @@ router.get("/deleteOrder:_id", async (req, res) => {
   }
 });
 
+router.post("/pay", async (req, res) => {
+  try {
+    const orderData = new Order(req.body);
+    await orderData.save();
+    res.status(200).send("ok");
+    console.log(ok);
+  } catch (error) {
+    res.send("Server Error " + error);
+  }
+});
+
+// buy over
+
+// post section over
+
+// payment gateway setup
+const crypto = require("crypto");
+const Razorpay = require("razorpay");
+
+router.post("/order", (req, res) => {
+  let price = req.body.amount * 100;
+  price = parseFloat(price);
+  var instance = new Razorpay({
+    key_id: "rzp_live_y6fSdCH9fLpdbx",
+    key_secret: "Xvg8ZuezP7WEXVGlYtaPcOiz",
+  });
+  var options = {
+    amount: price, // amount in the smallest currency unit
+    currency: "INR",
+    receipt: "order_rcptid_11",
+    payment_capture: 1,
+  };
+  instance.orders.create(options, function (err, order) {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.json(order);
+    }
+  });
+});
+
+router.post("/payment", (req, res) => {
+  const generated_signature = crypto.createHmac(
+    "sha256",
+    "rzp_live_y6fSdCH9fLpdbx"
+  );
+  generated_signature.update(
+    req.body.razorpay_order_id + "|" + req.body.transactionid
+  );
+  if (generated_signature.digest("hex") === req.body.razorpay_signature) {
+    const transaction = new Transaction({
+      transactionid: req.body.transactionid,
+      transactionamount: req.body.transactionamount,
+    });
+    transaction.save(function (err, savedtransac) {
+      if (err) {
+        console.log(err);
+        return res.status(500).send("Some Problem Occured");
+      }
+      res.send({ transaction: savedtransac });
+    });
+  } else {
+    return res.send("failed");
+  }
+});
+// payment gateway setup over
+
 module.exports = router;

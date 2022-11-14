@@ -5,7 +5,7 @@ const Product = require("../model/productSchema");
 const User = require("../model/userSchema");
 const Order = require("../model/orderSchema");
 const { setToken, getToken } = require("../middleware/authentication");
-
+const Razorpay = require("razorpay");
 // add Product
 router.post("/addProduct", async (req, res) => {
   const { id, category, src, title, description, Price, discount } = req.body;
@@ -80,65 +80,6 @@ router.post("/signin", async (req, res) => {
     } else {
       res.status(400).json({ message: "Invalid email", message: data });
     }
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-//order
-
-router.post("/order", async (req, res) => {
-  const {
-    fname,
-    lname,
-    companyName,
-    street,
-    city,
-    state,
-    pinCode,
-    mobile,
-    email,
-    productName,
-    quantity,
-    price,
-    pMode,
-  } = req.body;
-
-  if (
-    !fname ||
-    !lname ||
-    !street ||
-    !city ||
-    !state ||
-    !pinCode ||
-    !mobile ||
-    !email ||
-    !productName ||
-    !quantity ||
-    !price ||
-    !pMode
-  ) {
-    return res.status(400).json({ error: "Check All Required Feild" });
-  }
-  try {
-    const order = new Order({
-      fname,
-      lname,
-      companyName,
-      street,
-      city,
-      state,
-      pinCode,
-      mobile,
-      email,
-      productName,
-      quantity,
-      price,
-      pMode,
-    });
-    let x = await order.save();
-    // console.log(x);
-    return res.status(201).json({ message: "Order Placed" });
   } catch (err) {
     console.log(err);
   }
@@ -222,26 +163,66 @@ router.get("/deleteOrder:_id", async (req, res) => {
   }
 });
 
-router.post("/pay", async (req, res) => {
+//order
+
+router.post("/order", async (req, res) => {
+  const {
+    fname,
+    lname,
+    companyName,
+    street,
+    city,
+    state,
+    pinCode,
+    mobile,
+    email,
+    productName,
+    quantity,
+    price,
+    pMode,
+  } = req.body;
+
+  if (
+    !fname ||
+    !lname ||
+    !street ||
+    !city ||
+    !state ||
+    !pinCode ||
+    !mobile ||
+    !email ||
+    !productName ||
+    !quantity ||
+    !price ||
+    !pMode
+  ) {
+    return res.status(400).json({ error: "Check All Required Feild" });
+  }
   try {
-    const orderData = new Order(req.body);
-    await orderData.save();
-    res.status(200).send("ok");
-    console.log(ok);
-  } catch (error) {
-    res.send("Server Error " + error);
+    const order = new Order({
+      fname,
+      lname,
+      companyName,
+      street,
+      city,
+      state,
+      pinCode,
+      mobile,
+      email,
+      productName,
+      quantity,
+      price,
+      pMode,
+    });
+    let x = await order.save();
+    // console.log(x);
+    return res.status(201).json({ message: "Order Placed" });
+  } catch (err) {
+    console.log(err);
   }
 });
 
-// buy over
-
-// post section over
-
-// payment gateway setup
-const crypto = require("crypto");
-const Razorpay = require("razorpay");
-
-router.post("/order", (req, res) => {
+router.post("/paymentgateway", (req, res) => {
   let price = req.body.amount * 100;
   price = parseFloat(price);
   var instance = new Razorpay({

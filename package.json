@@ -12,6 +12,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
     "node-modules": "^1.0.1",
-    "razorpay": "^2.8.3"
+    "razorpay": "^2.8.3",
+    "react-razorpay": "^1.2.0"
   }
 }

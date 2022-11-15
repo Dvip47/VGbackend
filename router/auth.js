@@ -193,8 +193,7 @@ router.post("/order", async (req, res) => {
     !email ||
     !productName ||
     !quantity ||
-    !price ||
-    !pMode
+    !price
   ) {
     return res.status(400).json({ error: "Check All Required Feild" });
   }
@@ -212,7 +211,6 @@ router.post("/order", async (req, res) => {
       productName,
       quantity,
       price,
-      pMode,
     });
     let x = await order.save();
     // console.log(x);

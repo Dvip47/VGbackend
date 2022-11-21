@@ -224,8 +224,8 @@ router.post("/paymentgateway", (req, res) => {
   let price = req.body.amount * 100;
   price = parseFloat(price);
   var instance = new Razorpay({
-    key_id: "rzp_live_y6fSdCH9fLpdbx",
-    key_secret: "Xvg8ZuezP7WEXVGlYtaPcOiz",
+    key_id: "rzp_test_kEwvmdkDDfOIUP",
+    key_secret: "SeggPSrmrG1q1cc7yNC9BOOV",
   });
   var options = {
     amount: price, // amount in the smallest currency unit

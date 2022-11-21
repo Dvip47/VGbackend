@@ -211,9 +211,9 @@ router.post("/order", async (req, res) => {
       quantity,
       price,
     });
-    let x = await order.save();
+    await order.save();
     // console.log(x);
-    return res.status(201).json({ message: "Order Placed" });
+    return res.status(200).json({ message: "Order Placed" });
   } catch (err) {
     console.log(err);
   }

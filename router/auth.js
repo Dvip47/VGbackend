@@ -179,7 +179,6 @@ router.post("/order", async (req, res) => {
     productName,
     quantity,
     price,
-    pMode,
   } = req.body;
 
   if (

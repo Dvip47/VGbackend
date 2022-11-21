@@ -36,9 +36,6 @@ const orderSchema = new mongoose.Schema({
   price: {
     type: Number,
   },
-  pMode: {
-    type: String,
-  },
 });
 const orderList = mongoose.model("order", orderSchema);
 module.exports = orderList;

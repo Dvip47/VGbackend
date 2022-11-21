@@ -20,6 +20,7 @@ router.post("/addProduct", upload.single("src"), async (req, res) => {
     if (productExist) {
       return res.status(442).json({ error: "Product already exist" });
     }
+
     const product = new Product({
       id,
       category,
@@ -31,7 +32,7 @@ router.post("/addProduct", upload.single("src"), async (req, res) => {
     });
     let x = await product.save();
 
-    return res.status(201).json({ message: "Product Added Successfulll" });
+    return res.status(200).json({ message: "Product Added Successfulll" });
   } catch (err) {
     console.log(err);
   }

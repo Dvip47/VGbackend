@@ -6,10 +6,13 @@ const User = require("../model/userSchema");
 const Order = require("../model/orderSchema");
 const { setToken, getToken } = require("../middleware/authentication");
 const Razorpay = require("razorpay");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 // add Product
-router.post("/addProduct", async (req, res) => {
+router.post("/addProduct", upload.single("src"), async (req, res) => {
   const { id, category, src, title, description, Price, discount } = req.body;
-  if (!id || !title || !Price || !description || !category) {
+  if (!id || !title || !src || !Price || !description || !category) {
     return res.status(442).json({ error: "Check all required feild" });
   }
   try {

@@ -13,7 +13,7 @@ const upload = multer({ dest: "uploads/" });
 router.post("/addProduct", upload.single("src"), async (req, res) => {
   const { id, category, src, title, description, Price, discount } = req.body;
   if (!id || !title || !src || !Price || !description || !category) {
-    return res.json({ status: "442", message: "Check all required feild" });
+    return res.json({ status: "000", message: "Check all required feild" });
   }
   try {
     const productExist = await Product.findOne({ description: description });

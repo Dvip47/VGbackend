@@ -18,7 +18,9 @@ router.post("/addProduct", upload.single("src"), async (req, res) => {
   try {
     const productExist = await Product.findOne({ description: description });
     if (productExist) {
-      return res.status(442).json({ error: "Product already exist" });
+      return res
+        .status(442)
+        .json({ status: "200", message: "Product already exist" });
     }
 
     const product = new Product({
@@ -32,7 +34,9 @@ router.post("/addProduct", upload.single("src"), async (req, res) => {
     });
     let x = await product.save();
 
-    return res.status(200).json({ message: "Product Added Successfulll" });
+    return res
+      .status(200)
+      .json({ status: "200", message: "Product Added Successfulll" });
   } catch (err) {
     console.log(err);
   }
